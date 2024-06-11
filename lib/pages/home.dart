@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:peony/peony.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -12,6 +12,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   late TabController tabController;
+  List<ArticleBean> articleList = [];
   Color confirmColor = const Color(0xff0D57BB);
   Color basicColor = const Color(0xff7AAAEA);
   int curIndex = 0;
@@ -19,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   @override
   void initState() {
     tabController = TabController(length: 4, vsync: this);
+    loadArticleFromAsset();
     super.initState();
   }
 
@@ -60,26 +62,32 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         height: 20.w,
                         width: 70.w,
                         color: Colors.cyan,
-                        child: Text(" 我的掘金"),
+                        child: Text(
+                          " 我的掘金",
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 80.w,
-                    left: 20.w,
+                    top: 120.w,
+                    left: 40.w,
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 30.w, // 圆形半径
-                          backgroundImage: AssetImage(Assets.avatar), // 网络图片// 本地资源图片
+                          radius: 70.w, // 圆形半径
+                          backgroundImage: const AssetImage(Assets.avatar), // 网络图片// 本地资源图片
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 15.w,
                         ),
-                        const Text(
+                        Text(
                           "衿璃",
-                          style: TextStyle(color: Colors.grey),
-                        )
+                          style: TextStyle(
+                            color: const Color(0xfff57c1a),
+                            fontSize: 30.sp,
+                          ),
+                        ),
                       ],
                     ),
                   )
@@ -111,17 +119,19 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     (index) => Container(
                           color: curIndex == index ? confirmColor : basicColor,
                           width: double.infinity,
-                          margin: EdgeInsets.only(right: 10.w),
+                          padding: EdgeInsets.only(top: 10.w, bottom: 10.w, left: 10.w, right: 10.w),
                           child: Text(
                             barName[index],
-                            style: const TextStyle(color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 24.sp),
                             textAlign: TextAlign.center,
                           ),
                         ))),
             SizedBox(
               height: 671.w,
-              child: TabBarView(controller: tabController, children: const [
-                ArticlePage(),
+              child: TabBarView(controller: tabController, children: [
+                ArticlePage(
+                  articles: articleList,
+                ),
                 DiaryPage(),
                 MessagePage(),
                 MePage(),
@@ -131,5 +141,13 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         ),
       ),
     );
+  }
+
+  /// 读取文章
+  Future<void> loadArticleFromAsset() async {
+    String content = await rootBundle.loadString(Assets.articleData);
+    Map<String, dynamic> configAsMap = json.decode(content);
+    articleList = (configAsMap["articleList"] as List).map((e) => ArticleBean.fromMap(e)).toList();
+    setState(() {});
   }
 }
