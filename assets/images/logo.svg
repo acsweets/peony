@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- 外部圆形背景 -->
+    <circle cx="100" cy="100" r="90" fill="#ffffff" stroke="#007acc" stroke-width="4" />
+
+    <!-- 左侧模拟大括号的曲线 -->
+    <path d="M 60 40 C 40 40, 40 160, 60 160" fill="none" stroke="#007acc" stroke-width="6" />
+
+    <!-- 右侧模拟大括号的曲线 -->
+    <path d="M 140 40 C 160 40, 160 160, 140 160" fill="none" stroke="#007acc" stroke-width="6" />
+
+    <!-- 中间的博客名称或标识 -->
+    <text x="50" y="115" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#007acc">
+        AC
+    </text>
+</svg>

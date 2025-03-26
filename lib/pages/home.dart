@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:peony/peony.dart';
 
+import '../json_parser/parser.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -102,8 +104,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 // indicator: const BoxDecoration(
                 //   color: Color(0xff0D57BB), // 设置overlayColor的颜色
                 // ),
-                overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
+                overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                  (Set<WidgetState> states) {
                     // return const Color(0xff7AAAEA);
                     //如果不想设置未选中时的overlayColor，返回null
                     // return const Color(0xff0D57BB); // 例如：半透明的蓝色
@@ -132,7 +134,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 ArticlePage(
                   articles: articleList,
                 ),
-                DiaryPage(),
+                JsonAnalysisTool(),
+                // DiaryPage(),
                 MessagePage(),
                 MePage(),
               ]),
