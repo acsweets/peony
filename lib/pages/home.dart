@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:peony/peony.dart';
 
-import '../json_parser/parser.dart';
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -12,7 +10,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
   List<ArticleBean> articleList = [];
   Color confirmColor = const Color(0xff0D57BB);
@@ -78,7 +77,8 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                       children: [
                         CircleAvatar(
                           radius: 70.w, // 圆形半径
-                          backgroundImage: const AssetImage(Assets.avatar), // 网络图片// 本地资源图片
+                          backgroundImage:
+                              const AssetImage(Assets.avatar), // 网络图片// 本地资源图片
                         ),
                         SizedBox(
                           height: 15.w,
@@ -121,25 +121,34 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     (index) => Container(
                           color: curIndex == index ? confirmColor : basicColor,
                           width: double.infinity,
-                          padding: EdgeInsets.only(top: 10.w, bottom: 10.w, left: 10.w, right: 10.w),
+                          padding: EdgeInsets.only(
+                              top: 10.w, bottom: 10.w, left: 10.w, right: 10.w),
                           child: Text(
                             barName[index],
-                            style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 24.sp),
                             textAlign: TextAlign.center,
                           ),
                         ))),
-            SizedBox(
-              height: 671.w,
-              child: TabBarView(controller: tabController, children: [
-                ArticlePage(
-                  articles: articleList,
-                ),
-                JsonAnalysisTool(),
-                // DiaryPage(),
-                MessagePage(),
-                MePage(),
-              ]),
-            )
+            GestureDetector(
+              onTap: () {
+                context.go('/diary');
+              },
+              child: const Text("跳转"),
+            ),
+
+            // SizedBox(
+            //   height: 671.w,
+            //   child: TabBarView(controller: tabController, children: [
+            //     ArticlePage(
+            //       articles: articleList,
+            //     ),
+            //     const JsonAnalysisTool(),
+            //     // DiaryPage(),
+            //     MessagePage(),
+            //     MePage(),
+            //   ]),
+            // )
           ],
         ),
       ),
@@ -150,7 +159,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   Future<void> loadArticleFromAsset() async {
     String content = await rootBundle.loadString(Assets.articleData);
     Map<String, dynamic> configAsMap = json.decode(content);
-    articleList = (configAsMap["articleList"] as List).map((e) => ArticleBean.fromMap(e)).toList();
+    articleList = (configAsMap["articleList"] as List)
+        .map((e) => ArticleBean.fromMap(e))
+        .toList();
     setState(() {});
   }
 }

@@ -1,31 +1,136 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:peony/json_parser/parser_json.dart';
 
-import '../pages/layout.dart';
+import '../pages/welcome_page.dart';
 import '../peony.dart';
-
+import '../widgets/navigation/web_nav.dart';
+///路由还有个重定向
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/welcome',
   routes: [
-    GoRoute(
-      name: 'home',
-      // Optional, add name to your routes. Allows you navigate by name instead of path
-      path: '/',
-      builder: (context, state) => ScreenUtilInit(
-          designSize: const Size(1920, 1080),
-          builder: (_, child) {
-            // return const MyHomePage();
-            // return const Layout();
-
-            return JsonAnalysisTool();
-          }),
+    ShellRoute(
+      routes: [
+        GoRoute(
+          name: 'diary',
+          path: '/diary',
+          // builder: (context, state) => const DiaryPage(),
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            state: state,
+            child: const DiaryPage(),
+          ),
+        ),
+        GoRoute(
+          name: 'me',
+          path: '/me',
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            state: state,
+            child: const MePage(),
+          ),
+          // builder: (context, state) => const MePage(),
+        ),
+      ],
+      builder: (context, state, child) {
+        return WebNav(
+          body: child, // 二级导航和主内容区域
+        );
+        return child;
+      },
     ),
-    // GoRoute(
-    //   name: 'page2',
-    //   path: '/page2',
-    //   builder: (context, state) => Page2Screen(),
-    // ),
+    GoRoute(
+        name: 'welcome',
+        // Optional, add name to your routes. Allows you navigate by name instead of path
+        path: '/welcome',
+        pageBuilder: (context, state) => buildPageWithAnimation(
+          state: state,
+          child: const WelcomePage(),
+        ),
+        builder: (context, state) => const WelcomePage()),
   ],
 );
+
+Page<T> buildPageWithAnimation<T>({
+  required Widget child,
+  required GoRouterState state,
+}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: kSlideBottomToTopWithSecondary,
+  );
+}
+
+///默认情况下， A 进入 B 界面， A 界面是静止不动的。而 secondaryAnimation 的价值在于:
+//
+// 推入路由 B 时， 旧顶层路由 A 的 secondaryAnimation 将从 0.0 运行到 1.0，从而有退出动画效果。
+// 路由 B 退出时， 下层路由 A 的 secondaryAnimation 将从 1.0 运行到 0.0，从而有进入动画效果。
+// 使用 secondaryAnimation 可以让非顶层，但可视的路由拥有动画效果，可以让界面间的跳转更加自然和流畅。
+RouteTransitionsBuilder kSlideBottomToTopWithSecondary = (
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
+  return SlideTransition(
+    position: Tween<Offset>(
+      begin: const Offset(0.0, 1.0),
+      end: Offset.zero,
+    ).animate(animation),
+    child: SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset.zero,
+        end: const Offset(0.0, 1.0),
+      ).animate(secondaryAnimation),
+      child: child,
+    ),
+  );
+};
+
+RouteTransitionsBuilder kSlideRotateFadeInWithSecondary = (
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
+  final rotateOut = RotationTransition(
+    turns: Tween<double>(
+      begin: 0.0,
+      end: 0.1, // 旋转角度（可调）
+    ).animate(
+        CurvedAnimation(parent: secondaryAnimation, curve: Curves.easeInOut)),
+    child: FadeTransition(
+      opacity: Tween<double>(
+        begin: 1.0,
+        end: 0.0,
+      ).animate(
+          CurvedAnimation(parent: secondaryAnimation, curve: Curves.easeIn)),
+      child: child,
+    ),
+  );
+
+  /// 页面进入时动画
+  final slideIn = SlideTransition(
+    position: Tween<Offset>(
+      begin: const Offset(1.0, 0.0), // 右侧开始
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+    child: rotateOut,
+  );
+  // 旧页面：旋转 + 淡出
+  return slideIn;
+
+  //淡入
+  // return FadeTransition(
+  //   opacity: animation,
+  //   child: child,
+  // );
+  ///幻灯片
+  //     return SlideTransition(
+  //       position: Tween<Offset>(
+  //         begin: const Offset(1, 0),
+  //         end: Offset.zero,
+  //       ).animate(animation),
+  //       child: child,
+  //     );
+};

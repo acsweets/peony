@@ -5,6 +5,9 @@ class Assets {
   static const bg_2 = "assets/images/bg2.jpg";
   static const bg_3 = "assets/images/bg3.jpg";
   static const avatar = "assets/images/avatar.jpg";
+  static const welcomeBg =  'assets/images/wbg.png';
+
+
   ///数据
 
 

@@ -110,9 +110,17 @@ const pageTransitionsTheme = PageTransitionsTheme(
     TargetPlatform.android: CupertinoPageTransitionsBuilder(),
     TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
     TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+    TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
   },
 );
 
+// pageTransitionsTheme: const PageTransitionsTheme(builders: {
+// TargetPlatform.android: SlidePageTransitionsBuilder(),
+// TargetPlatform.iOS: SlidePageTransitionsBuilder(),
+// TargetPlatform.macOS: FadePageTransitionsBuilder(),
+// TargetPlatform.windows: FadePageTransitionsBuilder(),
+// TargetPlatform.linux: FadePageTransitionsBuilder(),
+// }),
 ProgressIndicatorThemeData progressIndicatorTheme({
   required Color color,
   required Color linearTrackColor,
@@ -121,3 +129,7 @@ ProgressIndicatorThemeData progressIndicatorTheme({
       color: color,
       linearTrackColor: linearTrackColor,
     );
+
+
+
+

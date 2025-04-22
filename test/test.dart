@@ -27,13 +27,21 @@
 //   await fetchMarkdownFile();
 // }
 
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+///# 仓库信息
+// owner = "your-username"  # 替换为你的 GitHub 用户名
+// repo = "your-repo"  # 替换为你的仓库名
+// file_path = "docs/example.md"  # 替换为你的 Markdown 文件路径
+//
+// # API 请求 URL
+// url = f"https://api.github.com/repos/{owner}/{repo}/contents/{file_path}"
 ///将github 白嫖到底
 Future<List<Map<String, String>>> fetchMarkdownFiles() async {
+  //acsweets/peony/tree/main/assets/data
+  ///      "https://api.github.com/repos/acsweets/books/contents/tips";
   String folderUrl =
-      "https://api.github.com/repos/acsweets/books/contents/tips";
+      "https://api.github.com/repos/acsweets/peony/contents/assets/data";
   List<Map<String, String>> markdownFiles = [];
 
   try {
@@ -43,7 +51,7 @@ Future<List<Map<String, String>>> fetchMarkdownFiles() async {
       List<dynamic> files = jsonDecode(response.body);
 
       for (var file in files) {
-        if (file['name'].endsWith('.md')) {
+        if (file['name'].endsWith('.MD')) {
           String fileUrl = file['url'];
           String content = await fetchMarkdownContent(fileUrl);
           markdownFiles.add({
@@ -82,7 +90,7 @@ Future<String> fetchMarkdownContent(String fileUrl) async {
 
 void main() async {
   List<Map<String, String>> markdownFiles = await fetchMarkdownFiles();
-
+  print(markdownFiles);
   for (var file in markdownFiles) {
     print("📄 文件名: ${file['name']}");
     print("📝 内容:\n${file['content']}");

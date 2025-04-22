@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:peony/peony.dart';
 import 'package:peony/utils/use_model.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +12,9 @@ class MyWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return ScreenUtilInit(
+    //     designSize: const Size(1920, 1080),
+    //     builder: (_, child) {
     return MaterialApp.router(
       routerConfig: router,
       title: 'Jinli\'s Blog',
@@ -28,5 +30,6 @@ class MyWeb extends StatelessWidget {
       locale: const Locale('en'),
       supportedLocales: S.delegate.supportedLocales,
     );
+    // });
   }
 }
