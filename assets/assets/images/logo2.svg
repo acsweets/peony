@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- 定义渐变色 -->
+    <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#007acc"/>
+            <stop offset="100%" stop-color="#00c6ff"/>
+        </linearGradient>
+    </defs>
+
+    <!-- 外部大菱形形状，作为主要图形元素 -->
+    <polygon points="100,20 160,100 100,180 40,100" fill="url(#grad1)" />
+
+    <!-- 内部叠加的半透明菱形，为图形增加层次感 -->
+<!--    <polygon points="100,35 140,100 100,165 60,100" fill="#ffffff" opacity="0.8"/>-->
+    <polygon points="40,100 100,70 160,100 100,130" fill="#ffffff" opacity="0.8"/>
+
+    <!-- 添加一条流畅的弧线细节，呼应科技感 -->
+    <text x="50" y="110" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" fill="#007acc">
+        AC
+    </text>
+<!--    <path d="M70,100 Q100,70 130,100" stroke="#007acc" stroke-width="4" fill="none"/>-->
+</svg>
