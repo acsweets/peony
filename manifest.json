@@ -1,11 +1,11 @@
 {
-    "name": "peony",
-    "short_name": "peony",
+    "name": "Jinli\\'s Blog",
+    "short_name": "Jinli",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "牡丹之爱，宜乎众矣",
+    "description": "写给未来的自己，也欢迎你一同阅读",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

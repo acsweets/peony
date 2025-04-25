@@ -1,0 +1,21 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="blueGradient" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#66B2FF" />
+            <stop offset="100%" stop-color="#3399FF" />
+        </radialGradient>
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+        </filter>
+    </defs>
+
+    <!-- 背景圆形徽章 -->
+    <circle cx="100" cy="100" r="95" fill="url(#blueGradient)" filter="url(#softShadow)" />
+
+    <!-- 星星轮廓 -->
+    <path d="M100 30 L115 75 H165 L125 110 L140 160 L100 130 L60 160 L75 110 L35 75 H85 Z"
+        stroke="#fff" stroke-width="6" fill="none" stroke-linejoin="round"/>
+
+    <!-- 中间代码符号 -->
+    <text x="50%" y="56%" text-anchor="middle" fill="#ffffff" font-size="30" font-family="monospace">&lt;/&gt;</text>
+</svg>
