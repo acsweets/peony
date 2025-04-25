@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:peony/peony.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   List<ArticleBean> articleList = [];
@@ -21,7 +21,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     tabController = TabController(length: 4, vsync: this);
-    loadArticleFromAsset();
     super.initState();
   }
 
@@ -45,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage>
                         )),
                   ),
                   Positioned(
-                    top: 50.w,
-                    right: 200.w,
+                    top: 50,
+                    right: 200,
                     child: GestureDetector(
                       onTap: () async {
                         Uri url = Uri.https(
@@ -60,34 +59,34 @@ class _MyHomePageState extends State<MyHomePage>
                         }
                       },
                       child: Container(
-                        height: 20.w,
-                        width: 70.w,
+                        height: 20,
+                        width: 70,
                         color: Colors.cyan,
-                        child: Text(
+                        child: const Text(
                           " 我的掘金",
-                          style: TextStyle(fontSize: 16.sp),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 120.w,
-                    left: 40.w,
+                  const Positioned(
+                    top: 120,
+                    left: 40,
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 70.w, // 圆形半径
+                          radius: 70, // 圆形半径
                           backgroundImage:
-                              const AssetImage(Assets.avatar), // 网络图片// 本地资源图片
+                              AssetImage(Assets.avatar), // 网络图片// 本地资源图片
                         ),
                         SizedBox(
-                          height: 15.w,
+                          height: 15,
                         ),
                         Text(
                           "衿璃",
                           style: TextStyle(
-                            color: const Color(0xfff57c1a),
-                            fontSize: 30.sp,
+                            color: Color(0xfff57c1a),
+                            fontSize: 30,
                           ),
                         ),
                       ],
@@ -121,12 +120,11 @@ class _MyHomePageState extends State<MyHomePage>
                     (index) => Container(
                           color: curIndex == index ? confirmColor : basicColor,
                           width: double.infinity,
-                          padding: EdgeInsets.only(
-                              top: 10.w, bottom: 10.w, left: 10.w, right: 10.w),
+                          padding: const EdgeInsets.all(10,),
                           child: Text(
                             barName[index],
                             style:
-                                TextStyle(color: Colors.white, fontSize: 24.sp),
+                                const TextStyle(color: Colors.white, fontSize: 24),
                             textAlign: TextAlign.center,
                           ),
                         ))),
@@ -153,15 +151,5 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
     );
-  }
-
-  /// 读取文章
-  Future<void> loadArticleFromAsset() async {
-    String content = await rootBundle.loadString(Assets.articleData);
-    Map<String, dynamic> configAsMap = json.decode(content);
-    articleList = (configAsMap["articleList"] as List)
-        .map((e) => ArticleBean.fromMap(e))
-        .toList();
-    setState(() {});
   }
 }

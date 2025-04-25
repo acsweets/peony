@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../asset/asset.dart';
+import '../route/route_key.dart';
+import '../utils/use_model.dart';
 
 ///文字渐渐变实
 class WelcomePage extends StatefulWidget {
@@ -23,12 +26,14 @@ class _WelcomePageState extends State<WelcomePage>
       vsync: this,
       duration: const Duration(seconds: 2), // 动画持续时间
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UseModel>(context, listen: false).changeInitState();
+    });
 
     _fadeAnimation = CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
     );
-
     _controller.forward(); // 开始动画
   }
 
@@ -55,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage>
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                '欢迎来到星星的博客',
+                '欢迎来到衿璃的博客',
                 style: TextStyle(
                     color: Color(0xff666666),
                     fontSize: 60,
@@ -75,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage>
                 height: 48,
               ),
               TextButton(
-                  onPressed: () => context.go('/me'),
+                  onPressed: () => context.go(RouteNavConfig.home.path),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 48,

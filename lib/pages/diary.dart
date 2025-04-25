@@ -11,18 +11,8 @@ class DiaryPage extends StatefulWidget {
 class _DiaryPageState extends State<DiaryPage> {
   @override
   Widget build(BuildContext context) {
-    return Text('Diary');
+    return const Center(
+      child: Text('me'),
+    );
   }
 }
-// Swiper(
-// autoplay: true,
-// itemBuilder: (context, index) {
-// return Image.asset(
-// Assets.bg_3,
-// fit: BoxFit.fill,
-// );
-// },
-// itemCount: 3,
-// pagination: const SwiperPagination(),
-// control: const SwiperControl(),
-// ),

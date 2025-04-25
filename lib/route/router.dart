@@ -1,33 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:peony/json_parser/parser_json.dart';
+import 'package:peony/route/route_key.dart';
+import 'package:provider/provider.dart';
 
+import '../pages/board.dart';
 import '../pages/welcome_page.dart';
 import '../peony.dart';
+import '../utils/use_model.dart';
 import '../widgets/navigation/web_nav.dart';
+
 ///路由还有个重定向
 // GoRouter configuration
 final router = GoRouter(
   initialLocation: '/welcome',
+  redirect: (BuildContext context, GoRouterState state) {
+    final bool isFirst = Provider.of<UseModel>(context, listen: false).first;
+    ///如果你需要支持带参数或者嵌套路由（比如 /welcome/info），可以用 startsWith 来判断：
+    final goingToWelcome = state.uri.path == '/welcome';
+
+    if (isFirst) {
+      // 首次进入，可以跳转到 /welcome
+      return null;
+    }
+
+    if (!isFirst && goingToWelcome) {
+      // 已经不是首次进入，但又想跳到 /welcome，不允许，重定向到 /me
+      return '/me';
+    }
+
+    return null; // 其他路径正常跳转
+  },
   routes: [
     ShellRoute(
       routes: [
         GoRoute(
-          name: 'diary',
-          path: '/diary',
-          // builder: (context, state) => const DiaryPage(),
+          name: RouteNavConfig.diary.name,
+          path: RouteNavConfig.diary.path,
           pageBuilder: (context, state) => buildPageWithAnimation(
             state: state,
             child: const DiaryPage(),
           ),
         ),
         GoRoute(
-          name: 'me',
-          path: '/me',
+          name: RouteNavConfig.aboutMe.name,
+          path: RouteNavConfig.aboutMe.path,
           pageBuilder: (context, state) => buildPageWithAnimation(
             state: state,
             child: const MePage(),
           ),
-          // builder: (context, state) => const MePage(),
+        ),
+        GoRoute(
+          name: RouteNavConfig.home.name,
+          path: RouteNavConfig.home.path,
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            state: state,
+            child: const HomePage(),
+          ),
+        ),
+        GoRoute(
+          name: RouteNavConfig.board.name,
+          path: RouteNavConfig.board.path,
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            state: state,
+            child: const BoardPage(),
+          ),
+        ),
+        GoRoute(
+          name: RouteNavConfig.article.name,
+          path: RouteNavConfig.article.path,
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            state: state,
+            child: const ArticlePage(),
+          ),
         ),
       ],
       builder: (context, state, child) {
@@ -38,13 +82,12 @@ final router = GoRouter(
       },
     ),
     GoRoute(
-        name: 'welcome',
-        // Optional, add name to your routes. Allows you navigate by name instead of path
-        path: '/welcome',
+        name: RouteNavConfig.welcome.name,
+        path: RouteNavConfig.welcome.path,
         pageBuilder: (context, state) => buildPageWithAnimation(
-          state: state,
-          child: const WelcomePage(),
-        ),
+              state: state,
+              child: const WelcomePage(),
+            ),
         builder: (context, state) => const WelcomePage()),
   ],
 );
@@ -72,19 +115,23 @@ RouteTransitionsBuilder kSlideBottomToTopWithSecondary = (
   Animation<double> secondaryAnimation,
   Widget child,
 ) {
-  return SlideTransition(
-    position: Tween<Offset>(
-      begin: const Offset(0.0, 1.0),
-      end: Offset.zero,
-    ).animate(animation),
-    child: SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset.zero,
-        end: const Offset(0.0, 1.0),
-      ).animate(secondaryAnimation),
-      child: child,
-    ),
+  return FadeTransition(
+    opacity: animation,
+    child: child,
   );
+  // return SlideTransition(
+  //   position: Tween<Offset>(
+  //     begin: const Offset(0.0, 1.0),
+  //     end: Offset.zero,
+  //   ).animate(animation),
+  //   child: SlideTransition(
+  //     position: Tween<Offset>(
+  //       begin: Offset.zero,
+  //       end: const Offset(0.0, 1.0),
+  //     ).animate(secondaryAnimation),
+  //     child: child,
+  //   ),
+  // );
 };
 
 RouteTransitionsBuilder kSlideRotateFadeInWithSecondary = (

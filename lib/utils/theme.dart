@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'text_theme.dart';
 
 part 'theme_fragment.dart';
+///海鸥体
+const fontFamily = 'seagull';
+const fontFamilyFallback = ['Archivo', 'MiSans'];
 
 abstract class EvColors {
   static const primary = Color(0xFF049DFA);
@@ -66,11 +69,12 @@ final lightTheme = ThemeData(
   ),
   pageTransitionsTheme: pageTransitionsTheme,
   listTileTheme: listTileTheme,
-  fontFamily: 'Poppins',
+  fontFamily: fontFamily,
   useMaterial3: true,
 );
 
 final darkTheme = ThemeData(
+
   colorScheme: darkColorScheme,
   filledButtonTheme: filledButtonTheme,
   outlinedButtonTheme: outlinedButtonTheme(Colors.white),
@@ -94,7 +98,7 @@ final darkTheme = ThemeData(
   ),
   pageTransitionsTheme: pageTransitionsTheme,
   listTileTheme: listTileTheme,
-  fontFamily: 'Poppins',
+  fontFamily: fontFamily,
   useMaterial3: true,
 );
 
