@@ -15,8 +15,8 @@ Future<void> main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
-  loadHttpFont(fontFamily: 'cute', urlString: '/cute.ttf');
-  loadHttpFont(fontFamily: 'seagull', urlString: '/seagull.ttf');
+  loadHttpFont(fontFamily: 'cute', urlString: '/peony/cute.ttf');
+  loadHttpFont(fontFamily: 'seagull', urlString: '/peony/seagull.ttf');
 
   const HashUrlStrategy();
   runApp(
