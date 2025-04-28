@@ -39,9 +39,9 @@ const RESOURCES = {"assets/AssetManifest.json": "35c9b57bb47ca7fc9c9024acc4d3900
 "canvaskit/skwasm_st.js": "d1326ceef381ad382ab492ba5d96f04d",
 "canvaskit/canvaskit.js.symbols": "68eb703b9a609baef8ee0e413b442f33",
 "canvaskit/skwasm_st.js.symbols": "c7e7aac7cd8b612defd62b43e3050bdd",
-"index.html": "77660cdedd022e8d3887ef08a3e1ef48",
-"/": "77660cdedd022e8d3887ef08a3e1ef48",
-"flutter_bootstrap.js": "f12f250f7e5a0973d4d1e19aa851ab59",
+"index.html": "1e2c7271121e8598c9655408d48cdf82",
+"/": "1e2c7271121e8598c9655408d48cdf82",
+"flutter_bootstrap.js": "a6b8da18a3e70e2196b04fd6a118c3ae",
 "logo3.svg": "7a838ea1e81cc2273c8bac44aadcc473",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
@@ -51,7 +51,7 @@ const RESOURCES = {"assets/AssetManifest.json": "35c9b57bb47ca7fc9c9024acc4d3900
 "cute.ttf": "1dd2b1680fa4f8879130405f77cd7aa1",
 "seagull.ttf": "812ab80c875336ef65fb8ece822a5c17",
 "logo.svg": "ae102b71133004cf264358d383bf5b8e",
-"main.dart.js": "833b6f5c29499ec1efba54c7ab08e869"};
+"main.dart.js": "ffd1e4cc9a0cea3b922f34e5429e1473"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",

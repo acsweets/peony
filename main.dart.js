@@ -25533,8 +25533,8 @@ if($.a6==null)A.aoN()
 $.a6.toString
 s=2
 return A.E(A.an1("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVuZWJxYW1vcHh0YnN5b2pyc3Z4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4MjM2NzcsImV4cCI6MjA1NDM5OTY3N30._-waTE_BULxq31uBa5P4jCth-Z8Q9gjgXU4qcA5s-8E","https://enebqamopxtbsyojrsvx.supabase.co"),$async$ayG)
-case 2:A.wM("cute","/cute.ttf")
-A.wM("seagull","/seagull.ttf")
+case 2:A.wM("cute","/peony/cute.ttf")
+A.wM("seagull","/peony/seagull.ttf")
 q=A.aSy(B.Yi,A.a([new A.xF(new A.vA(new A.ayJ(),null,null,A.b0_(),A.aZw(),t.or),null,null,null,null,t.zT)],t.Ds))
 if($.a6==null)A.aoN()
 p=$.a6
